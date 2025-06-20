@@ -29,6 +29,7 @@
         :disabled="inputDisabled"
         :readonly="readonly"
         :autocomplete="autoComplete || autocomplete"
+        :placeholder="' '"
         ref="input"
         @compositionstart="handleCompositionStart"
         @compositionupdate="handleCompositionUpdate"
@@ -38,7 +39,10 @@
         @blur="handleBlur"
         @change="handleChange"
         :aria-label="label"
+        id="floating_outlined"
       >
+      <label for="floating_outlined" class="el-input__label">{{ placeholder }}</label>
+
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
@@ -47,6 +51,7 @@
            :class="prefixIcon">
         </i>
       </span>
+      
       <!-- 后置内容 -->
       <span
         class="el-input__suffix"
@@ -143,6 +148,7 @@
     },
 
     props: {
+      placeholder: String,
       value: [String, Number],
       size: String,
       resize: String,

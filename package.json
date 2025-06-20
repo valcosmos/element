@@ -1,6 +1,6 @@
 {
-  "name": "element-ui",
-  "version": "2.15.14",
+  "name": "wzfe-element",
+  "version": "0.0.4",
   "description": "A Component Library for Vue.js.",
   "main": "lib/element-ui.common.js",
   "files": [
@@ -12,7 +12,7 @@
   ],
   "typings": "types/index.d.ts",
   "scripts": {
-    "bootstrap": "yarn || npm i",
+    "bootstrap": "npm i",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
@@ -21,9 +21,9 @@
     "deploy:build": "npm run build:file && cross-env NODE_ENV=production webpack --config build/webpack.demo.js && echo element.eleme.io>>examples/element-ui/CNAME",
     "deploy:extension": "cross-env NODE_ENV=production webpack --config build/webpack.extension.js",
     "dev:extension": "rimraf examples/extension/dist && cross-env NODE_ENV=development webpack --watch --config build/webpack.extension.js",
-    "dev": "npm run bootstrap && npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js & node build/bin/template.js",
+    "dev": "npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js & node build/bin/template.js",
     "dev:play": "npm run build:file && cross-env NODE_ENV=development PLAY_ENV=true webpack-dev-server --config build/webpack.demo.js",
-    "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:umd && npm run build:theme",
+    "dist": "npm run clean && npm run build:file && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:umd && npm run build:theme",
     "i18n": "node build/bin/i18n.js",
     "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
     "pub": "npm run bootstrap && sh build/git-release.sh && sh build/release.sh && node build/bin/gen-indices.js",
@@ -39,16 +39,15 @@
       "domain": "element-theme",
       "public": "examples/element-ui",
       "build": [
-        "yarn",
         "npm run deploy:build"
       ]
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:ElemeFE/element.git"
+    "url": ""
   },
-  "homepage": "http://element.eleme.io",
+  "homepage": "",
   "keywords": [
     "eleme",
     "vue",
@@ -56,7 +55,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ElemeFE/element/issues"
+    "url": ""
   },
   "unpkg": "lib/index.js",
   "style": "lib/theme-chalk/index.css",
@@ -96,7 +95,7 @@
     "es6-promise": "^4.0.5",
     "eslint": "4.18.2",
     "eslint-config-elemefe": "0.1.1",
-    "eslint-loader": "^2.0.0",
+    "eslint-loader": "3.0.3",
     "eslint-plugin-html": "^4.0.1",
     "eslint-plugin-json": "^1.2.0",
     "file-loader": "^1.1.11",
@@ -147,5 +146,6 @@
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.11",
     "webpack-node-externals": "^1.7.2"
-  }
+  },
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

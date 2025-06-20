@@ -57,6 +57,11 @@
         color: $--input-disabled-placeholder-color;
       }
     }
+
+    .el-input__label {
+      color: $--input-disabled-color;
+      background-color: $--input-disabled-fill;
+    }
   }
 
   @include when(exceed) {
@@ -76,6 +81,22 @@
   display: inline-block;
   width: 100%;
   @include scroll-bar;
+
+  & .el-input__label {
+    position: absolute;
+    font-size: 12px;
+    line-height: initial;
+    color: $--input-placeholder-color;
+    transition: all 300ms ease-in-out;
+    z-index: 10;
+    transform-origin: left;
+    background-color: $--input-background-color;
+    left: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(1);
+    top: 50%;
+    margin: 0 15px;
+  }
 
   & .el-input__clear {
     color: $--input-icon-color;
@@ -119,13 +140,15 @@
     padding: 0 15px;
     transition: $--border-transition-base;
     width: 100%;
+    appearance: none;
+    outline: none;
 
     &::-ms-reveal {
       display: none;
     }
 
     &::placeholder {
-      color: $--input-placeholder-color;
+      color: transparent;
     }
 
     &:hover {
@@ -135,6 +158,22 @@
     &:focus {
       outline: none;
       border-color: $--input-focus-border;
+    }
+
+    // 浮动标签样式 - 当输入框获得焦点时，标签上移
+    &:focus ~ .el-input__label {
+      transform: translateY(-16px) scale(0.75);
+      top: 8px;
+      padding: 0 8px;
+      margin: 0 8px;
+      color: $--input-focus-border;
+    }
+
+    // 当输入框有值时，标签保持上移状态
+    &:not(:placeholder-shown) ~ .el-input__label {
+      transform: translateY(-16px) scale(0.75);
+      top: 8px;
+      padding: 0 8px;
     }
   }
 
@@ -197,9 +236,16 @@
       color: $--input-disabled-color;
       cursor: not-allowed;
 
+      
+
       &::placeholder {
         color: $--input-disabled-placeholder-color;
       }
+    }
+
+    .el-input__label {
+      color: $--input-disabled-color;
+      background-color: $--input-disabled-fill;
     }
 
     .el-input__icon {
@@ -228,6 +274,9 @@
   @include m(prefix) {
     .el-input__inner {
       padding-left: 30px;
+    }
+    .el-input__label{
+      margin-left: 30px;
     }
   }
 
